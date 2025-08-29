@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, output, signal } from '@angular/core';
 
 @Component({
   selector: 'app-height-selector',
@@ -7,5 +7,17 @@ import { Component, signal } from '@angular/core';
   styleUrl: './height-selector.component.css'
 })
 export class HeightSelectorComponent {
-  heightValue = signal(170)
+
+  height = signal(170);
+
+  heightValue = output<number>();
+
+  setHeight(value: number) {
+    this.height.set(value);
+    this.emitHeight();
+  }
+
+  private emitHeight() {
+    this.heightValue.emit(this.height());
+  }
 }

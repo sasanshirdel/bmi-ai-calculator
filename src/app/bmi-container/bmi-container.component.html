@@ -3,15 +3,22 @@
         <h1 class="font-bold text-3xl">BMI Claculator + AI</h1>
     </header>
 
-    <main>
+    <main class="">
         <section class="gender-selector">
-            <app-gender-selector />
+            <app-gender-selector (genderValue)="gender.set($event)" />
+        </section>
+        <section class="mt-4 flex justify-center items-center">
+            <app-height-selector (heightValue)="height.set($event)" />
         </section>
         <section class="mt-4">
-            <app-height-selector />
+            <app-age-weight-selector (valuesChanged)="ageAndWeight.set($event)" />
         </section>
-        <section class="mt-4">
-            <app-age-weight-selector />
+
+        <section class="flex justify-center mt-6">
+            <button (click)="calculate()"
+                class="w-full bg-cyan-600 text-white font-bold px-6 py-3 rounded-2xl shadow-lg hover:bg-cyan-500 active:scale-95 transition-transform">
+                Calculate
+            </button>
         </section>
     </main>
 </div>
