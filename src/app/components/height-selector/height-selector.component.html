@@ -1,6 +1,6 @@
 <div class="bg-gray-700 flex flex-col justify-center items-center shadow-xl/30 p-4 rounded-2xl">
-    <span class="text-white">Height</span>
-    <p class="font-bold text-white text-3xl my-2">{{heightValue()}}</p>
+    <h4 class="text-white text-3xl">Height</h4>
+    <p class="font-bold text-white text-3xl my-3">{{heightValue()}}</p>
     <input type="range" [value]="heightValue()" (input)="heightValue.set($any($event.target).value)" min="100" max="210"
         class="w-3/4 h-3 mt-2 bg-gray-300 rounded-lg appearance-none cursor-pointer accent-cyan-500" />
 </div>
