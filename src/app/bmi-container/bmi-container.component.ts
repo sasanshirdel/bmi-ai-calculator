@@ -14,7 +14,7 @@ export class BmiContainerComponent {
 
   private router = inject(Router)
 
-  gender = signal<string | null>(null);
+  gender = signal<string>('male');
   height = signal<number | null>(170);
   ageAndWeight = signal<{ age: number; weight: number } | null>(null)
 

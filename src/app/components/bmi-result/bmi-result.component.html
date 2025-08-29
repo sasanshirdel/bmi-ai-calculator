@@ -1,13 +1,84 @@
-<div class="container m-auto p-3">
-    <header class="bg-cyan-950 text-white text-center py-6 px-4 rounded-2xl">
-        <h1 class="font-bold text-3xl">Your BMI Result</h1>
+<div class="container m-auto p-3 max-w-2xl">
+
+    <header class="bg-cyan-950 text-white text-center py-6 px-4 rounded-2xl mb-6">
+        <h1 class="font-bold text-3xl">BMI Calculation Results</h1>
     </header>
 
-    <main class="mt-6 text-center text-white">
-        <p class="text-xl font-semibold">Gender: {{ gender }}</p>
-        <p class="text-xl font-semibold">Age: {{ age }}</p>
-        <p class="text-xl font-semibold">Height: {{ height }} cm</p>
-        <p class="text-xl font-semibold">Weight: {{ weight }} kg</p>
-        <p class="mt-4 text-3xl font-bold text-cyan-600">BMI: {{ bmi | number:'1.1-2' }}</p>
-    </main>
+    <div class="bg-white shadow rounded-2xl p-6">
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <p class="text-gray-500">Gender</p>
+                <p class="font-semibold">{{ gender === 'male' ? 'Male' : 'Female' }}</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <p class="text-gray-500">Age</p>
+                <p class="font-semibold">{{ age }} years</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <p class="text-gray-500">Height</p>
+                <p class="font-semibold">{{ height }} cm</p>
+            </div>
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <p class="text-gray-500">Weight</p>
+                <p class="font-semibold">{{ weight }} kg</p>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <h2 class="text-xl font-bold mb-4">BMI Results</h2>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-cyan-50 p-4 rounded-lg text-center">
+                    <p class="text-cyan-800">BMI Value</p>
+                    <p class="text-3xl font-bold">{{ bmi | number:'1.1-1' }}</p>
+                </div>
+                <div class="p-4 rounded-lg text-center {{ getStatusColor() }}">
+                    <p>Status</p>
+                    <p class="text-xl font-bold">{{ bmiCategory }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-6">
+            <h2 class="text-xl font-bold mb-4">AI Analysis</h2>
+
+            <div class="w-full bg-gray-100 rounded-2xl p-6 shadow-md min-h-[200px] flex justify-center items-center">
+                @if (loading) {
+                <div class="text-center">
+                    <div
+                        class="animate-spin border-4 border-cyan-500 border-t-transparent rounded-full w-12 h-12 mx-auto mb-4">
+                    </div>
+                    <p class="text-gray-600">Fetching analysis from AI...</p>
+                </div>
+                } @else {
+                <div class="w-full">
+                    @if (error) {
+                    <div class="bg-red-50 border border-red-200 p-4 rounded-lg text-red-800 mb-4">
+                        <p>{{ error }}</p>
+                    </div>
+                    }
+
+                    <div class="mb-4">
+                        <h3 class="font-semibold text-lg mb-2">Overall Analysis:</h3>
+                        <p class="text-gray-700">{{ aiAnalysis }}</p>
+                    </div>
+                    @if (recommendations.length > 0) {
+                    <div>
+                        <h3 class="font-semibold text-lg mb-2">Recommendations:</h3>
+                        <ul class="list-disc list-inside space-y-2">
+                            @for (rec of recommendations; track $index) {
+                            <li class="text-gray-700">{{ rec }}</li>
+                            }
+                        </ul>
+                    </div>
+                    }
+                </div>
+                }
+            </div>
+        </div>
+
+        <button (click)="goBack()"
+            class="w-full bg-cyan-600 text-white font-bold px-6 py-3 rounded-2xl shadow-lg hover:bg-cyan-500 transition-colors">
+            Recalculate
+        </button>
+    </div>
 </div>

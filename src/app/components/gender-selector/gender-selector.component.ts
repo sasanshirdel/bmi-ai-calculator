@@ -10,9 +10,9 @@ import { Component, output, signal } from '@angular/core';
 export class GenderSelectorComponent {
 
   // User Gender
-  gender = signal<string | null>(null)
+  gender = signal<string>("male")
 
-  genderValue = output<string | null>()
+  genderValue = output<string>()
 
   onSelectGender(gender: string) {
     this.gender.set(gender);
