@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { GenderComponent } from "../components/gender-selector/gender-selector.component";
+import { GenderSelectorComponent } from "../components/gender-selector/gender-selector.component";
+import { HeightSelectorComponent } from "../components/height-selector/height-selector.component";
 
 @Component({
   selector: 'app-bmi-container',
-  imports: [GenderComponent],
+  imports: [GenderSelectorComponent, HeightSelectorComponent],
   templateUrl: './bmi-container.component.html',
   styleUrl: './bmi-container.component.css'
 })
